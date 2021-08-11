@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+
+.card-container {
+  @include flex(column);
+  @include for-size(tablet-landscape-up) {
+    flex-direction: row;
+  }
+  .card {
+    @extend %flex1;
+    padding: 20px;
+    border-radius: 10px;
+    background: $maincolor;
+    color: $fontcolor;
+    border-left: 4px solid $accentcolor;
+    @include shadow(8px 8px 16px -4px rgba(0,0,0,0.35));
+    margin: 20px;
+    & h2 {
+      color: $accentcolor;
+      margin-bottom: 16px;
+    }
+    & input {
+      width: 100%;
+    }
+    & button {
+      margin: 10px 0px;
+    }
+    & .result {
+      margin-top: 20px;
+      text-align: center;
+      &.true {
+        color: green;
+      }
+      &.false {
+        color: red;
+      }
+    }
+  }
+}

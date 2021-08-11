@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+/* Remove default padding */
+ol[class],
+ul[class] {
+    padding: 0;
+}
+/* Remove default margin */
+blockquote,
+body,
+dd,
+dl,
+figcaption,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+ol,
+ul {
+  margin: 0;
+}
+
+html,
+body {
+  @include font(regular);
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  @include for-size(tablet-portrait-up) {
+    padding: 40px;
+  }
+  & > h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    & > a {
+      text-decoration: none;
+      color: $maincolor;
+    }
+  }
+}
+
+.content {
+  margin: 20px;
+}

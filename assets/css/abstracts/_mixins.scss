@@ -1,0 +1,136 @@
+@use 'sizes' as *;
+
+@mixin ie-only {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin for-size($size) {
+    @if $size == phone-only {
+        @media (max-width: 320px) {
+            @content;
+        }
+    } @else
+    if $size == phone-small-up {
+        @media (min-width: 321px) {
+            @content;
+        }
+    } @else
+    if $size == phone-big-up {
+        @media (min-width: 475px) {
+            @content;
+        }
+    } @else
+    if $size == tablet-portrait-up {
+        @media (min-width: 600px) {
+            @content;
+        }
+    } @else
+    if $size == tablet-landscape-up {
+        @media (min-width: 900px) {
+            @content;
+        }
+    } @else
+    if $size == desktop-up {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    } @else
+    if $size == big-desktop-up {
+        @media (min-width: 1800px) {
+            @content;
+        }
+    }
+}
+
+%flex1 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  @include ie-only {
+    flex-basis: auto !important;
+  }
+  @include for-size(tablet-landscape-up) {
+    @include ie-only {
+      flex-basis: 0;
+    }
+  }
+}
+
+%reset {
+    margin: 0;
+    padding: 0;
+}
+
+%flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+//Flex mixin for easier flexing
+@mixin flex($direction) {
+    @extend %flex;
+    @if $direction == row {
+      flex-direction: row;
+    } @else
+    if $direction == column {
+      flex-direction: column;
+    }
+}
+
+//Use this varible to set dynamic padding on the site wide elements
+@mixin sitepadding {
+  padding-left: 20px;
+  padding-right: 20px;
+  @include for-size(phone-big-up) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @include for-size(tablet-landscape-up) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @include for-size(desktop-up) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+//Use this to keep shadows across the site consistent - KEEP THIS SUBTLE
+@mixin shadow($args...) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+
+//Mixin for transition webkits
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+//b0rder
+@mixin border($color) {
+  // outline: 4px solid $color !important;
+  // outline-offset: -4px !important;
+}
+
+@function calculateRem($size) {
+  $remSize: $size / $fontsize;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size * 0.8;
+  font-size: calculateRem($size * 0.8);
+  @include for-size(tablet-portrait-up) {
+    font-size: $size;
+    font-size: calculateRem($size);
+  }
+}

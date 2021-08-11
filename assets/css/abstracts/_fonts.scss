@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@mixin font($weight) {
+  @if $weight == light {
+    font-family: light;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+  } @else if $weight == regular {
+    font-family: regular;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+  } @else if $weight == medium {
+    font-family: medium;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+  } @else if $weight == bold {
+    font-family: bold;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+  }  @else
+  if $weight == black {
+    font-family: bold;
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+  }
+}
